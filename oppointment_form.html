@@ -1,0 +1,21 @@
+<?php
+
+$name = $_POST['name'];
+$phone = $_POST['phone'];
+$dname = $_POST['dname'];
+$email = $_POST['email'];
+$date = $_POST['date'];
+$timing = $_POST['timing'];
+
+$conn = new mysqli('localhost','root','','hospital_db');
+if($conn->connect_error){
+    die('connection failed :' .$conn->connect_error );
+}
+else{
+    $stml =$conn->prepare("insert into registration(name, phone, dname, email, date, timing)
+     value(?, ?, ?, ?, ?, ?)");
+    $stml->bind_param("sissss", $name, $phone, $dname, $email, $date, $timing);
+    echo "Oppointment Done";
+    $stml->close();
+}
+?>
